@@ -11,11 +11,12 @@ import java.util.ArrayList;
 public class Hangman {
     // hi i'm adding my name Christine Gao
     // final vars AKA constant
-    private final int MAX_GUESSES = 4;
+    private int MAX_GUESSES;
     // Keep track of the guesses
     private int guessNum;
     private ArrayList<Character> listOfGuesses;
     private String[] wordBank = {"freedom", "contract", "eternity", "wisdom", "justice", "war", "angst"};
+    private String wordToGuess;
 
     /*
      * Constructor!
@@ -23,6 +24,8 @@ public class Hangman {
     public Hangman(){
         guessNum = 0;
         listOfGuesses = new ArrayList<Character>();
+        wordToGuess = wordBank[(int) (Math.random()*wordBank.length)];
+        MAX_GUESSES = wordToGuess.length();
     }
 
     public boolean isNotMaxGuess() {
@@ -31,9 +34,34 @@ public class Hangman {
 
     /*
      * Print dashes for letters not found and the letter itself for letters found.
+     * This contains the bulk of the logic
      */
     public boolean printGuess() {
-        return false;
+        boolean noDashes = true;
+
+        // iterate through the string
+        for(int i = 0; i < wordToGuess.length(); i++){
+            char curLetter = wordToGuess.charAt(i);
+            // If the guess is found, type the letter out
+            if(listOfGuesses.contains(curLetter)){
+                System.out.print(curLetter + " ");
+            }
+            else{
+                System.out.print("_ ");
+                noDashes = false;
+            }
+        }
+
+        // if there are dashes AKA you haven't guessed the word, then print the guesses
+        if(!noDashes) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("\nYou have ");
+            sb.append(MAX_GUESSES - guessNum);
+            sb.append(" tries left.\n");
+            System.out.println(sb.toString());
+        }
+
+        return noDashes;
     }
 
     public void makeGuess(Character curGuess) {
@@ -44,6 +72,9 @@ public class Hangman {
         }
 
         listOfGuesses.add(curGuess);
-        guessNum += 1;
+        // if the word doesn't contain the guess, then add one to the guess counter
+        if(wordToGuess.indexOf(curGuess) == -1){
+            guessNum++;
+        }
     }
 }

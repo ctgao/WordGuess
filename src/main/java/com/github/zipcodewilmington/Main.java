@@ -30,6 +30,7 @@ public class Main {
         do {
             System.out.println("Current guesses: ");
             if(mrMan.printGuess()){
+                System.out.println("\n\nCongratulations! You winnin\' son!\n");
                 break;
             }
 
