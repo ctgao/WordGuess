@@ -2,6 +2,7 @@ package com.github.zipcodewilmington;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * @author xt0fer
@@ -10,7 +11,6 @@ import java.util.ArrayList;
  */
 public class Hangman {
     // hi i'm adding my name Christine Gao
-    // final vars AKA constant
     private int MAX_GUESSES;
     // Keep track of the guesses
     private int guessNum;
@@ -22,14 +22,35 @@ public class Hangman {
      * Constructor!
      */
     public Hangman(){
-        guessNum = 0;
-        listOfGuesses = new ArrayList<Character>();
-        wordToGuess = wordBank[(int) (Math.random()*wordBank.length)];
-        MAX_GUESSES = wordToGuess.length();
+        this.guessNum = 0;
+        this.listOfGuesses = new ArrayList<Character>();
+        this.wordToGuess = this.wordBank[(int) (Math.random()*this.wordBank.length)];
+        this.MAX_GUESSES = this.wordToGuess.length();
+    }
+    /*
+     * The getters for the tester function.
+     */
+    public void setWordToGuess(String input) {
+        this.wordToGuess = input;
+        this.MAX_GUESSES = input.length();
+    }
+    public void setGuessNum(int input){
+        this.guessNum = input;
+    }
+    public void addToListOfGuesses(char[] arrayOfChars){
+        for(char c : arrayOfChars){
+            listOfGuesses.add(c);
+        }
+    }
+    public void clearListOfGuesses(){
+        listOfGuesses.clear();
     }
 
-    public boolean isNotMaxGuess() {
-        return guessNum != MAX_GUESSES;
+    /*
+     * The functions after this are for the Main function to use
+     */
+    public boolean isMaxGuess() {
+        return this.guessNum == this.MAX_GUESSES;
     }
 
     /*
@@ -40,10 +61,10 @@ public class Hangman {
         boolean noDashes = true;
 
         // iterate through the string
-        for(int i = 0; i < wordToGuess.length(); i++){
-            char curLetter = wordToGuess.charAt(i);
+        for(int i = 0; i < this.wordToGuess.length(); i++){
+            char curLetter = this.wordToGuess.charAt(i);
             // If the guess is found, type the letter out
-            if(listOfGuesses.contains(curLetter)){
+            if(this.listOfGuesses.contains(curLetter)){
                 System.out.print(curLetter + " ");
             }
             else{
@@ -56,7 +77,7 @@ public class Hangman {
         if(!noDashes) {
             StringBuilder sb = new StringBuilder();
             sb.append("\nYou have ");
-            sb.append(MAX_GUESSES - guessNum);
+            sb.append(this.MAX_GUESSES - this.guessNum);
             sb.append(" tries left.\n");
             System.out.println(sb.toString());
         }
@@ -66,15 +87,15 @@ public class Hangman {
 
     public void makeGuess(Character curGuess) {
         // you have already guessed this letter before
-        if(listOfGuesses.contains(curGuess)){
+        if(this.listOfGuesses.contains(curGuess)){
             System.out.println("This was a previous guess!");
             return;
         }
 
-        listOfGuesses.add(curGuess);
+        this.listOfGuesses.add(curGuess);
         // if the word doesn't contain the guess, then add one to the guess counter
-        if(wordToGuess.indexOf(curGuess) == -1){
-            guessNum++;
+        if(this.wordToGuess.indexOf(curGuess) == -1){
+            this.guessNum++;
         }
     }
 }

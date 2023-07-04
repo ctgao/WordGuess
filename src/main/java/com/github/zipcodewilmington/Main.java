@@ -41,8 +41,10 @@ public class Main {
             }
             mrMan.makeGuess(curGuess);
 
-        } while(mrMan.isNotMaxGuess());
-        if(!mrMan.isNotMaxGuess()){
+        } while(!mrMan.isMaxGuess());
+
+        // did you run out of guesses?
+        if(mrMan.isMaxGuess()){
             System.out.println("You ran outta lives :(\n");
         }
 
