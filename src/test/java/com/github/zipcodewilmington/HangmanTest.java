@@ -65,14 +65,14 @@ public class HangmanTest {
     public void testPrintGuess2() {
         // now set the guesses to some of the correct letters
         theHangman.clearListOfGuesses();
-        theHangman.addToListOfGuesses(new char[]{'e','x','c','b','a'});
+        theHangman.addToListOfGuesses('e','x','c','b','a');
         Assert.assertFalse(theHangman.printGuess());
     }
     @Test
     public void testPrintGuess3() {
         // now set the guesses to some of the correct letters
         theHangman.clearListOfGuesses();
-        theHangman.addToListOfGuesses(new char[]{'e','x','c','u','t','i','o','n','r'});
+        theHangman.addToListOfGuesses('e','x','c','u','t','i','o','n','r');
         Assert.assertTrue(theHangman.printGuess());
     }
 }

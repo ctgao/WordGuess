@@ -37,7 +37,7 @@ public class Hangman {
     public void setGuessNum(int input){
         this.guessNum = input;
     }
-    public void addToListOfGuesses(char[] arrayOfChars){
+    public void addToListOfGuesses(char... arrayOfChars){
         for(char c : arrayOfChars){
             listOfGuesses.add(c);
         }
